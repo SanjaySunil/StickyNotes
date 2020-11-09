@@ -1,0 +1,188 @@
+<!--
+ * Author: Sanjay Sunil (D3VSJ)
+ * License: MIT
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StickyNotes</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body class="auth-false">
+  <div class="container">
+    <header class="clearfix">
+      <h1>Sticky Notes</h1>
+      <div class="userAuth unauthenticated pull-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+          Register
+        </button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+          Login
+        </button>
+      </div>
+      <div class="userAuth authenticated pull-right">
+        <span class="user-info">
+        </span>
+        <button type="button" class="btn btn-success" id="logout">
+          Logout
+        </button>
+      </div>
+    </header>
+    <hr />
+    <main class="authenticated">
+      <center>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createNoteModal">
+          Add Sticky Note
+        </button>
+      </center>
+      <div id="notes"></div>
+    </main>
+  </div>
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="registerForm" method="POST">
+          <div class="modal-header">
+            <h4 class="modal-title" id="registerModalLabel">Register</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">First Name:</label>
+              <input type="text" class="form-control" id="registerFirstName" />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">Last Name:</label>
+              <input type="text" class="form-control" id="registerLastName" />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">Email:</label>
+              <input type="text" class="form-control" id="registerEmail" />
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">Password:</label>
+              <input type="password" class="form-control" id="registerPassword" />
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">Confirm Password:</label>
+              <input type="password" class="form-control" id="registerConfirmPassword" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" id="doRegister">
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="loginForm" method="POST">
+          <div class="modal-header">
+            <h4 class="modal-title" id="loginModalLabel">Login</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">Email:</label>
+              <input type="text" class="form-control" id="loginEmail" />
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">Password:</label>
+              <input type="password" class="form-control" id="loginPassword" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" id="doLogin">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="createNoteModal" tabindex="-1" role="dialog" aria-labelledby="Add Note"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="POST" id="createNote" name="createNote">
+          <div class="modal-header">
+            <h4 class="modal-title" id="addStickyNoteLabel">
+              Add Sticky Note
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="name">Title</label>
+              <input type="text" class="form-control" id="name" required placeholder="Enter Title" />
+            </div>
+            <div class="form-group">
+              <label for="value">Description</label>
+              <input type="text" class="form-control" id="value" placeholder="Enter Value" />
+            </div>
+            <!--
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="text" class="form-control" id="date" placeholder="Enter Date" />
+            </div>
+            <div class="form-group">
+              <label for="time">Time</label>
+              <input type="text" class="form-control" id="time" placeholder="Enter Time" />
+            </div>
+          -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary addValue">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+  <link href="lib/noty/noty.css" rel="stylesheet"> 
+  <link href="lib/noty/nest.css" rel="stylesheet"> 
+  <script src="lib/noty/noty.js" type="text/javascript"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
