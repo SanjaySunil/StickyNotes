@@ -51,19 +51,11 @@ $(document).ready(function () {
               .then(function () {
                 console.log("User Information Saved:", user.uid);
               });
-            console.log("Success");
             window.location.reload();
           })
           .catch(function (error) {
             console.log("Error creating user:", error);
-            new Noty({
-              type: 'error',
-              theme: "nest",
-              closeWith: ['button'],
-              text: error.message,
-              timeout: 5000,
-              progressBar: true
-            }).show()
+            errorNotification(error.message)
           });
       } else {
         //password and confirm password didn't match
@@ -92,14 +84,7 @@ $(document).ready(function () {
         .catch(function (error) {
           console.log("Login Failed!");
           console.log(error.message)
-          new Noty({
-            type: 'error',
-            theme: "nest",
-            closeWith: ['button'],
-            text: error.message,
-            timeout: 5000,
-            progressBar: true
-          }).show()
+          errorNotification(error.message)
         });
     }
   });
@@ -128,25 +113,11 @@ $(document).ready(function () {
           },
           */
         });
-        new Noty({
-          type: 'success',
-          theme: "nest",
-          closeWith: ['button'],
-          text: "Sticky Note Added!",
-          timeout: 5000,
-          progressBar: true
-        }).show()
+        successNotification("Sticky Note Added!")
         document.createNote.reset();
         $('#createNoteModal').modal('hide')
       } else {
-        new Noty({
-          type: 'success',
-          theme: "nest",
-          closeWith: ['button'],
-          text: "Please fill at least a title or description!",
-          timeout: 5000,
-          progressBar: true
-        }).show()
+        errorNotification("Please fill a title or description!")
       }
     } else {
       //inform user to login
@@ -174,28 +145,14 @@ $(document).ready(function () {
               '<span class="user-name">' + user.displayName + "</span>"
             );
             console.log("Welcome, " + user.displayName + "!");
-            new Noty({
-              type: 'success',
-              theme: "nest",
-              closeWith: ['button'],
-              text: "Welcome, " + user.displayName + "!",
-              timeout: 5000,
-              progressBar: true
-            }).show()
+            successNotification("Welcome, " + user.displayName + "!")
           } else if (info.firstName) {
             $(".user-info img").hide();
             $(".user-info").append(
               '<span class="user-name"> Hello, ' + info.firstName + "!</span>"
             );
             console.log("Welcome, " + info.firstName + "!");
-            new Noty({
-              type: 'success',
-              theme: "nest",
-              closeWith: ['button'],
-              text: "Welcome, " + info.firstName + "!",
-              timeout: 5000,
-              progressBar: true
-            }).show()
+            successNotification("Welcome, " + info.firstName + "!")
           }
         });
       notesRef.child(user.uid).on("child_added", onChildAdd);
@@ -244,17 +201,6 @@ function noteFormObject(key, notes) {
 function spanText(textStr, textClasses) {
   var classNames = textClasses.map((c) => "text-" + c).join(" ");
   return '<span class="' + classNames + '">' + textStr + "</span>";
-}
-
-function errorNotification() {
-  new Noty({
-    type: 'error',
-    theme: "nest",
-    closeWith: ['button'],
-    text: error.message,
-    timeout: 5000,
-    progressBar: true
-  }).show()
 }
 
 
