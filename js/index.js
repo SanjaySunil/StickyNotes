@@ -1,22 +1,10 @@
 /**
- * Author: Sanjay Sunil (D3VSJ)
- * License: MIT
+ * @file index.js
+ * @author Sanjay Sunil
+ * @license MIT
  */
 
 $(document).ready(function () {
-  //initialize the firebase app
-  var config = {
-    apiKey: "AIzaSyB51V-vQSx89fNJqvPaXyYSRNifhaB4bK0",
-    authDomain: "stickynotes-474d9.firebaseapp.com",
-    projectId: "stickynotes-474d9",
-    storageBucket: "stickynotes-474d9.appspot.com",
-    messagingSenderId: "472523983888",
-    appId: "1:472523983888:web:b56b514654a96775dc4e95",
-    measurementId: "G-P9SVKC7620",
-    databaseURL: "https://stickynotes-474d9-default-rtdb.firebaseio.com/",
-  };
-  firebase.initializeApp(config);
-
   // Firebase References
   var Auth = firebase.auth();
   var dbRef = firebase.database();
@@ -246,7 +234,7 @@ function noteFormObject(key, notes) {
     "</div>" +
     '<div class="card-footer">' +
     '<small>' +
-    "Edited at: " + notes.timestamp +
+    "Created At: " + notes.timestamp +
     '</small>' +
     '</div>' +
     "</div>"
