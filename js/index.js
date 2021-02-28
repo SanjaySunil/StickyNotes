@@ -6,13 +6,13 @@
 $(document).ready(function () {
   //initialize the firebase app
   var config = {
-    apiKey: "AIzaSyBOcSWO7my0qriZBdWywWZPWSinkru71SM",
-    authDomain: "fire-stickynotes.firebaseapp.com",
-    databaseURL: "https://fire-stickynotes.firebaseio.com",
-    projectId: "fire-stickynotes",
-    storageBucket: "fire-stickynotes.appspot.com",
-    messagingSenderId: "450114125909",
-    appId: "1:450114125909:web:e51437caa132b3f78054dc"
+    apiKey: "AIzaSyB51V-vQSx89fNJqvPaXyYSRNifhaB4bK0",
+    authDomain: "stickynotes-474d9.firebaseapp.com",
+    projectId: "stickynotes-474d9",
+    storageBucket: "stickynotes-474d9.appspot.com",
+    messagingSenderId: "472523983888",
+    appId: "1:472523983888:web:b56b514654a96775dc4e95",
+    measurementId: "G-P9SVKC7620"
   };
   firebase.initializeApp(config);
 
@@ -127,7 +127,7 @@ $(document).ready(function () {
     if (auth != null) {
       if ($("#name").val() != "" || $("#email").val() != "") {
         let current_datetime = new Date()
-        let formatted_date =  current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
+        let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
         notesRef.child(auth.uid).push({
           name: $("#name").val(),
           value: $("#value").val(),
@@ -157,7 +157,8 @@ $(document).ready(function () {
           text: "Please fill at least a title or description!",
           timeout: 5000,
           progressBar: true
-        }).show()      }
+        }).show()
+      }
     } else {
       //inform user to login
     }
@@ -208,7 +209,7 @@ $(document).ready(function () {
             }).show()
           }
         });
-        notesRef.child(user.uid).on("child_added", onChildAdd);
+      notesRef.child(user.uid).on("child_added", onChildAdd);
     } else {
       // No user is signed in.
       $("body").removeClass("auth-true").addClass("auth-false");
@@ -231,22 +232,22 @@ function noteFormObject(key, notes) {
 
   return (
     '<div class="card text-white bg-secondary mb-3" style="min-width: 18rem; max-width: 18rem;">' +
-        '<div class="card-header">' +
-            fireNote +
-        "</div>" +
-        '<div class="card-body">' +
-            '<h5 class="card-title">' +
-                notes.name +
-            "</h5>" +
-            '<p class="card-text">' +
-                notes.value +
-            '</p>'+
-        "</div>" +
-        '<div class="card-footer">' +
-          '<small>' +
-            "Edited at: " + notes.timestamp +
-          '</small>' +
-        '</div>' +
+    '<div class="card-header">' +
+    fireNote +
+    "</div>" +
+    '<div class="card-body">' +
+    '<h5 class="card-title">' +
+    notes.name +
+    "</h5>" +
+    '<p class="card-text">' +
+    notes.value +
+    '</p>' +
+    "</div>" +
+    '<div class="card-footer">' +
+    '<small>' +
+    "Edited at: " + notes.timestamp +
+    '</small>' +
+    '</div>' +
     "</div>"
   );
 }
