@@ -12,17 +12,17 @@ $(document).ready(function () {
   var usersRef = dbRef.ref("users");
   var auth = null;
 
-  //Register
+  // Register
   $("#registerForm").on("submit", function (e) {
     e.preventDefault();
     var data = {
-      email: $("#registerEmail").val(), //get the email from Form
-      firstName: $("#registerFirstName").val(), // get firstName
-      lastName: $("#registerLastName").val(), // get lastName
+      email: $("#registerEmail").val(),
+      firstName: $("#registerFirstName").val(),
+      lastName: $("#registerLastName").val(),
     };
     var passwords = {
-      password: $("#registerPassword").val(), //get the pass from Form
-      cPassword: $("#registerConfirmPassword").val(), //get the confirmPass from Form
+      password: $("#registerPassword").val(),
+      cPassword: $("#registerConfirmPassword").val(),
     };
     if (
       data.email != "" &&
@@ -34,27 +34,20 @@ $(document).ready(function () {
         firebase
           .auth()
           .createUserWithEmailAndPassword(data.email, passwords.password)
-          /*
-            .then(function (user) {
-              return user.updateProfile({
-                displayName: data.firstName + ' ' + data.lastName
-              })
-            })
-            */
           .then(function (user) {
-            //now user is needed to be logged in to save data
+
             auth = user;
-            //now saving the profile data
+
             usersRef
               .child(user.uid)
               .set(data)
               .then(function () {
-                console.log("User Information Saved:", user.uid);
+                console.log("User Information Saved: ", user.uid);
               });
             window.location.reload();
           })
           .catch(function (error) {
-            console.log("Error creating user:", error);
+            console.log("ERROR: ", error);
             errorNotification(error.message)
           });
       } else {
@@ -64,7 +57,7 @@ $(document).ready(function () {
     }
   });
 
-  //Login
+  // Login
   $("#loginForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -89,13 +82,14 @@ $(document).ready(function () {
     }
   });
 
+  // Logout 
   $("#logout").on("click", function (e) {
     e.preventDefault();
     console.log("Successfully logged out.")
     firebase.auth().signOut();
   });
 
-  //save createNote
+  // Create Note
   $("#createNote").on("submit", function (event) {
     event.preventDefault();
     if (auth != null) {
@@ -120,14 +114,15 @@ $(document).ready(function () {
         errorNotification("Please fill a title or description!")
       }
     } else {
-      //inform user to login
+      console.log("You must be logged in!")
     }
   });
 
+  // Firebase Auth State
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // User is logged in
-      console.log("User is logged in:")
+      console.log("User is logged in.")
       auth = user;
       $("body").removeClass("auth-false").addClass("auth-true");
       usersRef
@@ -172,7 +167,7 @@ function onChildAdd(snap) {
   $("#notes").append(noteFormObject(snap.key, snap.val()));
 }
 
-//prepare createNote object's HTML
+// Build Note
 function noteFormObject(key, notes) {
   const fireNote = "StickyNote"
 
@@ -196,11 +191,6 @@ function noteFormObject(key, notes) {
     '</div>' +
     "</div>"
   );
-}
-
-function spanText(textStr, textClasses) {
-  var classNames = textClasses.map((c) => "text-" + c).join(" ");
-  return '<span class="' + classNames + '">' + textStr + "</span>";
 }
 
 
