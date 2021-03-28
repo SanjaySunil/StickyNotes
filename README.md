@@ -76,7 +76,7 @@ git clone https://github.com/sanjaysunil/StickyNotes
 git clone https://github.com/sanjaysunil/StickyNotes
 ```
 
-2. Open <a href="https://firebase.google.com" target="blank">Firebase Console</a> and open console with a new created Firebase Project.
+2. Open <a href="https://firebase.google.com" target="_blank">Firebase Console</a> and open console with a new created Firebase Project.
 3. Obtain your Firebase app credentials and replace with the credentials located in `js/index.js`
 
 ```
