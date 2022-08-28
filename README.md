@@ -118,20 +118,3 @@ Contributions are what make the open source community such an amazing place to b
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-### Built With
-
-- [jQuery](https://jquery.com)
-- [Firebase](https://firebase.google.com)
-
----
-
-<div align="center">
-
-## Contact
-
-Website : [sanjaysunil.me](https://sanjaysunil.me) &nbsp;&middot;&nbsp;
-Email : [sanjaysunil@protonmail.com](mailto:sanjaysunil@protonmail.com) &nbsp;&middot;&nbsp;
-Discord : [D3VSJ#3158](https://discordapp.com/users/732336924559278181)
-
-</div>
